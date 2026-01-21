@@ -2,17 +2,14 @@ from typing_extensions import Self
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Any, Optional, Union
-from pydantic import field_validator
 
 # User trying to login (seralizer)
 class UsersCreationSchema(BaseModel):
-    id: int
     username: str
     email: EmailStr
     password: str
     is_admin: Optional[bool] = False
-    createdAt: datetime
-    lastLogin: datetime
+    createdAt: datetime = datetime.now()
 
 # User details serializer
 class UserDetailsSchema(BaseModel):
@@ -35,6 +32,7 @@ class UserUpdateSchema(BaseModel):
 class UserLoginSchema(BaseModel):
     email: EmailStr
     password: str
+    lastLogin: datetime = datetime.now()
 
 # Serializer to return after user logs in
 class UserTokenSchema(BaseModel):
