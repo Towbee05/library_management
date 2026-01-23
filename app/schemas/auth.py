@@ -10,6 +10,7 @@ class UsersCreationSchema(BaseModel):
     password: str
     is_admin: Optional[bool] = False
     createdAt: datetime = datetime.now()
+    lastLogin: Optional[datetime] = None
 
 # User details serializer
 class UserDetailsSchema(BaseModel):
@@ -18,7 +19,10 @@ class UserDetailsSchema(BaseModel):
     email: EmailStr
     is_admin: Union[bool, None]
     createdAt: datetime
-    lastLogin: datetime
+    lastLogin: Optional[datetime] = None
+
+    class Config:
+        orm_mode = True
 
 # Update user serializer
 class UserUpdateSchema(BaseModel):

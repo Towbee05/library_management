@@ -1,6 +1,7 @@
 __pycache__/
 .git/
 .env
+.env.test
 *.log
 node_modules/
 .venv

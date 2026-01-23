@@ -23,6 +23,6 @@ async def root():
 @app.get('/health')
 async def health():
     return {
-        "greetings" : "Hello, world"
-    }
+        "status": "healthy"
+        }
 
