@@ -1,5 +1,5 @@
 from .base import BaseRepository
-from app.schemas.auth import UsersCreationSchema
+from app.schemas.auth import UsersCreationSchema, UserDetailsSchema
 from app.models.auth import Users
 from pydantic import EmailStr
 
@@ -21,3 +21,18 @@ class UserRepository(BaseRepository):
         user = self.session.query(Users).filter_by(username= username).first()
         return bool(user)
     
+    def get_user_by_username(self, username: str) -> UserDetailsSchema | None:
+        user= self.session.query(Users).filter_by(username=username).first()
+        if user:
+            return user
+        return None
+
+    def get_user_by_id(self, user_id: int) -> UserDetailsSchema | None:
+        user= self.session.query(Users).filter_by(id=user_id).first()
+        if user:
+            return user
+        return None
+    
+    def is_user_admin(self, admin: bool) -> bool:
+        is_admin= self.session.query(Users).filter_by(is_admin=admin).first()
+        return is_admin

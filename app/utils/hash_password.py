@@ -1,16 +1,13 @@
-from bcrypt import checkpw, hashpw, gensalt
+from pwdlib import PasswordHash
 
-# Class to hash password
-class HashHelper(object):
+password_hasher= PasswordHash.recommended()
 
-    # Hash a password
+class HashHelper:
     @staticmethod
-    def hash_password(password: str) -> str:
-        return hashpw(password=password.encode("utf-8"), salt=gensalt()).decode("utf-8")
+    def hash_password(plain_password: str) -> str:
+        return password_hasher.hash(plain_password)
     
-    # Verify user password
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
-        if checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf-8")):
-            return True
-        return False
+        return password_hasher.verify(plain_password, hashed_password)
+    

@@ -34,12 +34,16 @@ class UserUpdateSchema(BaseModel):
 
 # Login user serializer
 class UserLoginSchema(BaseModel):
-    email: EmailStr
+    username: str
     password: str
     lastLogin: datetime = datetime.now()
 
+class TokenPayload(BaseModel):
+    username: str
+
 # Serializer to return after user logs in
 class UserTokenSchema(BaseModel):
-    refresh_token: str
+    token_type: str
     access_token: str
+    refresh_token: str
     
